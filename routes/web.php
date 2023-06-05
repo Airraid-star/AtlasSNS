@@ -20,7 +20,8 @@
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
+Route::get('/login', 'Auth\LoginController@login')->name('login');
+//Authにてroute('login')と指定されているので、Routeの名前を指定してあげる
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
@@ -30,11 +31,31 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::middleware('auth')->group(function(){
+    Route::get('/top','PostsController@index');
+    Route::post('/top','PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+    Route::post('/top/update','PostsController@update')->name('top.update');;
+    Route::post('/top/delete','PostsController@delete')->name('top.delete');
 
-Route::get('/search','UsersController@index');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+    Route::get('/profile','UsersController@profile');
+    Route::post('/profile','UsersController@profile');
+
+    Route::get('/user_profile','PostsController@user_profile')->name('user_profile');
+    Route::post('/user_profile','PostsController@user_profile')->name('user_profile');
+
+    Route::post('/user_profile/follow','UsersController@follow');
+    Route::post('/user_profile/unfollow','UsersController@unfollow');
+
+    Route::get('/search','UsersController@search')->name('search');
+
+    Route::post('/search/follow','UsersController@follow');
+    Route::post('/search/unfollow','UsersController@unfollow');
+
+    Route::get('/follow-list','PostsController@follow_list');
+    Route::get('/follower-list','PostsController@follower_list');
+
+    Route::get('/logout','Auth\LogoutController@logout');
+});
+

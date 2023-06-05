@@ -42,6 +42,15 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
 
+            $request->validate([
+                'username'=>['required','min:2','max:12'],
+                'mail'=>['required','min:5','max:40','unique:users,mail','email'],
+                'password'=>['required','digits_between:8,20','confirmed']
+            ]);
+
+            //[_confirmed]とついた物にバリテーションで[confirmed]をつけると確認入力となる
+            //'digits_between:8,20'は８桁から２０桁までの数字の意味
+
             $username = $request->input('username');
             $mail = $request->input('mail');
             $password = $request->input('password');
@@ -52,7 +61,8 @@ class RegisterController extends Controller
                 'password' => bcrypt($password),
             ]);
 
-            return redirect('added');
+            return redirect('added')->with('username',"$username");
+            //addedのsessionに$usernameの値を送る
         }
         return view('auth.register');
     }

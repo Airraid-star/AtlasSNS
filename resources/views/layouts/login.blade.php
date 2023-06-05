@@ -1,3 +1,10 @@
+@php
+use App\Post;
+use App\User;
+use App\Follow;
+@endphp
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +14,9 @@
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
+
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -18,22 +27,34 @@
     <!--iphoneのアプリアイコン指定-->
     <link rel="apple-touch-icon-precomposed" href="画像のURL" />
     <!--OGPタグ/twitterカード-->
+    <!-- JS、Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/logo.png"></a></h1>
-            <div id="">
-                <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
-                <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
+            <p class="atlas"><a href="/top"><img src="images/atlas.png"></a></p>
+            <p class="header-name"><a data-toggle="collapse" href="#functionList" role="button" aria-expanded="false" aria-controls="functionList">
+                {{Auth::user()->username}}さん<img src="{{Auth::user()->icon}}">
+            </a></p>
+
+            <div class="collapse" id="functionList">
+                <div class="card">
+                    <div class="card-body">
+                         <ul>
+                             <li><a href="/top">ホーム</a></li>
+                             <li><a href="/profile">プロフィール編集</a></li>
+                             <li><a href="/logout">ログアウト</a></li>
+                         </ul>
+                    </div>
+                </div>
             </div>
         </div>
+
     </header>
     <div id="row">
         <div id="container">
@@ -41,24 +62,22 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{Auth::user()->username}}さんの</p>
                 <div>
-                <p>フォロー数</p>
-                <p>〇〇名</p>
+                <p>フォロー数　{{ Follow::where('following_id', Auth::user()->id)->count() }}人</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <p class="btn btn-primary"><a href="/follow-list">フォローリスト</a></p>
                 <div>
-                <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p>フォロワー数　{{ Follow::where('followed_id', Auth::user()->id)->count() }}人</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <p class="btn btn-primary"><a href="follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn btn-primary"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
+
+
 </body>
 </html>
