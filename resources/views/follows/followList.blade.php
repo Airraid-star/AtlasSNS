@@ -12,7 +12,6 @@ use App\Follow;
 @foreach ($users->reverse() as $user)
     <div>
         <img src="{{ $user->icon }}">
-        <p>{{ $user->username }}</p>
     </div>
 @endforeach
 @endif

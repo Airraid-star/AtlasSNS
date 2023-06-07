@@ -22,7 +22,7 @@
 </head>
 <body>
   <header>
-    <h1><a href="/top"><img src="images/atlas.png"></a></h1>
+    <p><a href="/top"><img src="images/atlas.png"></a></p>
     <p>Social Network Service</p>
   </header>
   <div id="container">

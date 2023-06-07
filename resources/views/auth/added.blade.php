@@ -2,15 +2,19 @@
 
 @section('content')
 
-<div id="clear">
-  <div class="clear-text">
+<div class="clear">
+  <div class="clear-hello">
     <p>{{Session::get('username')}}さん</p>
     <p>ようこそ!AtlasSNSへ!</p>
   </div>
-  <p>ユーザー登録が完了しました。</p>
-  <p>早速ログインをしてみましょう。</p>
 
-  <p class="btn btn-danger"><a href="/login">ログイン画面へ</a></p>
+  <div class="clear-p">
+    <p>ユーザー登録が完了しました。</p>
+    <p>早速ログインをしてみましょう。</p>
+  </div>
+
+<div class="center">
+  <a href="/login" class="btn btn-danger">ログイン画面へ</a>
 </div>
 
 @endsection

@@ -17,19 +17,23 @@
 @endforeach
 
 
-{{ Form::label('ユーザー名') }}
+{{ Form::label('username','user name') }}
 {{ Form::text('username',null,['class' => 'input form-control']) }}
 
-{{ Form::label('メールアドレス') }}
+{{ Form::label('mail','mail adress') }}
 {{ Form::text('mail',null,['class' => 'input form-control']) }}
 
-{{ Form::label('パスワード') }}
-{{ Form::password('password',null,['class' => 'input form-control']) }}
+{{ Form::label('password','pasword') }}
+{{ Form::password('password',['class' => 'input form-control']) }}
 
-{{ Form::label('パスワード確認') }}
-{{ Form::password('password_confirmation',null,['class' => 'input form-control']) }}
+{{ Form::label('password_confirmation','password comfirm') }}
+{{ Form::password('password_confirmation',['class' => 'input form-control']) }}
 <!-- [_confirmation]をつけることでconfirmationのタグで -->
-{{ Form::submit('REGISTER', ['class' => 'btn btn-danger']) }}
+
+<div class="right">
+    {{ Form::submit('REGISTER', ['class' => 'btn btn-danger']) }}
+</div>
+
 
 <p><a href="/login">ログイン画面へ戻る</a></p>
 

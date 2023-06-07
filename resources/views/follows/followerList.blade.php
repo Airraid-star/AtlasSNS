@@ -6,16 +6,16 @@ use App\Follow;
 @extends('layouts.login')
 
 @section('content')
-
+<div>
 <h2>Follower list</h2>
 @if($users -> isNotEmpty() )
 @foreach ($users->reverse() as $user)
     <div>
         <img src="{{ $user->icon }}">
-        <p>{{ $user->username }}</p>
     </div>
 @endforeach
 @endif
+</div>
 
 @if($posts -> isNotEmpty() )
 @foreach ($posts->reverse() as $post)

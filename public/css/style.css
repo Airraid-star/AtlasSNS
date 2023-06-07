@@ -4,19 +4,55 @@ html{
 body{
 }
 /* header */
+
+
+
 header{
     background:#186AC9;
-    height: 10%;
+    height: 60%;
 }
 
-.atlas a img{
-    width: 100px;
+#head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.header-name p a{
-    
+
+.atlas{
+    width: 10%;
+    margin: auto auto auto 1rem;
+
 }
 
+
+.atlas img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+.header-name {
+    margin: auto 1rem auto auto;
+    display: flex;
+    align-items: center;
+}
+
+.header-name a{
+    color: #ffffff;
+    margin-left: auto;
+}
+
+
+
+
+/* アコーディオンリスト */
+
+.card-body ul li a{
+    color: black;
+}
 
 /* main content */
 #row{
@@ -32,14 +68,71 @@ header{
 
 }
 
-
-
 a{
     color: #ffffff; text-decoration: none;
 }
 
-/* もーだる */
 
+
+/* index */
+
+
+
+.index-form{
+    height: 20vh;
+    border-bottom: 10px solid #dadada;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.index-form .index-text textarea {
+    resize: none;
+    outline: none;
+}
+
+
+.form-post {
+    width: 50px;
+    border-radius: 3px;
+}
+
+
+
+
+.post-container{
+    padding: 1rem;
+    height: auto;
+    border-bottom: 2px solid #dadada;
+    display: flex;
+    align-items:flex-start;
+}
+
+img{
+    width: 50px;
+}
+
+.post-icon{
+    margin:0 0 0 0 ;
+}
+
+.post-username{
+    font-weight:500;
+}
+
+.post-post{
+    white-space: pre-line;
+}
+
+
+button[type="submit"] {
+    border: none;
+    background-color: transparent;
+  }
+
+
+
+/* もーだる */
 /* 必要に応じて編集しご自身でSNS課題のレイアウトのようにカスタマイズしてください。 */
 .content{
     margin: 0 auto;
