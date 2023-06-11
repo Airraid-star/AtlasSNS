@@ -18,7 +18,7 @@ body{
     align-items: center;
     width: 100%;
     background:#186AC9;
-    height: 10vh;
+    height: 11vh;
 }
 
 
@@ -185,10 +185,6 @@ body{
 /* ----------------------------------------------------- */
 /* main content */
 
-header{
-    width: 100%;
-}
-
 #row{
     display: flex;
     flex-flow: row wrap;
@@ -212,7 +208,7 @@ header{
 .form-container{
     height: 20vh;
     border-bottom: 10px solid #dadada;
-    padding: 1rem;
+    padding: 2rem 1rem 1rem 1rem;
     display: flex;
     align-items: flex-start;
 }
@@ -225,6 +221,7 @@ header{
     overflow: hidden;
     resize: none;
     border: none;
+    font-size: 1rem;
 }
 
 

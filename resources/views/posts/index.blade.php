@@ -15,7 +15,7 @@
   <div class="form-box">
   {!! Form::open(['url' => '/top']) !!}
 
-   {{ Form::textarea('post',null,['class' => 'form-text','placeholder' =>'投稿内容を入力してください','rows'=>'4','cols'=>'50']) }}
+   {{ Form::textarea('post',null,['class' => 'form-text','placeholder' =>'投稿内容を入力してください','rows'=>'3','cols'=>'90']) }}
 
    {{ Form::hidden('user_id',Auth::user()->id) }}
 
