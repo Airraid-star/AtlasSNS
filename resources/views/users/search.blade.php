@@ -6,28 +6,35 @@ use App\Follow;
 
 @section('content')
 
-{!! Form::open(['class' => 'form','method' => 'GET']) !!}
+<div class="search-container">
+  {!! Form::open(['class' => 'form','method' => 'GET']) !!}
+
+  <div class="search-box">
+    {{ Form::text('search',null,['class' => 'input form-control search-text','placeholder' => 'ユーザー名']) }}
+    {{ Form::image('images/search.png', 'alt text', ['class' => 'index-form search-icon']) }}
+  </div>
+
+  {!! Form::close() !!}
 
 
-{{ Form::text('search',null,['class' => 'input form-control','placeholder' => 'ユーザー名']) }}
+  @if(isset($search))
+
+  <p class="su-word" >検索ワード：{{$search}}</p>
+
+  @endif
+
+</div>
+
+<p class="br"></p>
 
 
-{{ Form::image('images/search.png', 'alt text', ['class' => 'index-form']) }}
+@foreach ($users as $user)
+  <div class="su-container">
 
-
-{!! Form::close() !!}
-
-
-@if(isset($search))
- <p>検索ワード：{{$search}}</p>
- @endif
-
-<table>
-    @foreach ($users as $user)
-        <tr>
-         <td><image src="{{ $user->icon }}"></td>
-
-         <td>{{ $user->username }}</td>
+        <div class="su-box">
+          <img class="su-icon" src="{{ $user->icon }}">
+          <td>{{ $user->username }}</td>
+        </div>
 
 
          @if(Follow::where([
@@ -36,27 +43,27 @@ use App\Follow;
           ])->exists())
           <!-- フォローが自分でフォロワーが相手のデータがある時 -->
 
-        <td>
+        <div class="su-follow">
           {!! Form::open(['url' => '/search/unfollow', 'class' => 'form']) !!}
             {{ Form::hidden('id', $user->id) }}
             {{ Form::hidden('search', $search) }}
             {{ Form::submit('フォロー解除', ['class' => "btn btn-danger"]) }}
           {!! Form::close() !!}
-        </td>
+        </div>
 
          @else
-        <td>
+         <div class="su-follow">
           {!! Form::open(['url' => '/search/follow', 'class' => 'form']) !!}
             {{ Form::hidden('id', $user->id) }}
             {{ Form::hidden('search', $search) }}
             {{ Form::submit('フォローする', ['class' => "btn btn-primary"]) }}
           {!! Form::close() !!}
-        </td>
+         </div>
 
          @endif
-        <tr>
-    @endforeach
-</table>
+   </div>
+  @endforeach
+
 
 
 @endsection

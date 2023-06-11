@@ -21,7 +21,7 @@ class UsersController extends Controller
             $request->validate([
                 'username'=>['required','min:2','max:12'],
                 'mail'=>['required','min:5','max:40','email',Rule::unique('users')->ignore(Auth::user()->id,'id')],
-                'password'=>['nullable','digits_between:8,20','confirmed'],
+                'password'=>['required','digits_between:8,20','confirmed'],
                 'bio'=>['max:150'],
                 'images'=>['mimes:jpg,png,bmp,gif,svg']
             ]);

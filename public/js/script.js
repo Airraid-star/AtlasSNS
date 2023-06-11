@@ -22,3 +22,10 @@ $(function(){
         return false;
     });
 });
+
+$(function(){
+    $('.header-box').click(function(){
+        $('.header-arrow').toggleClass('active');
+        $('.accordion').toggleClass('active');
+    });
+});

@@ -15,7 +15,19 @@ class PostsController extends Controller
     //
     public function index(Request $request){
 
-        $posts = Post::get();
+        $followedUsers = Follow::where('following_id',Auth::user()->id)->pluck('followed_id');
+        //followsテーブルのpluckでフォロワーのIDのみ取得
+
+        $posts = collect();
+        //$postsと$usersを空の配列として定義
+
+        if(Post::whereIn('user_id',$followedUsers)->exists()){
+                $posts = Post::whereIn('user_id',$followedUsers)
+                         ->orWhere('user_id',Auth::user()->id)->get();
+            }
+
+
+
         if($request->isMethod('post')){
             $request->validate([
                 'post'=>['required','min:1','max:150']
@@ -76,11 +88,11 @@ class PostsController extends Controller
         //$postsと$usersを空の配列として定義
 
         if(Post::whereIn('user_id',$followedUsers)->exists()){
-                $posts = Post::whereIn('user_id',$followedUsers)->get();}
+                $posts = Post::whereIn('user_id',$followedUsers)->get();
+            }
 
         if(User::whereIn('id',$followedUsers)->exists()){
-                $users = User::whereIn('id',$followedUsers)->get();
-        }//whereInは配列内のどれかをwhereで探す
+                $users = User::whereIn('id',$followedUsers)->get();}//whereInは配列内のどれかをwhereで探す
 
         return view('follows.followList',compact('posts','users'));
     }

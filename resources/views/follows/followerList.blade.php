@@ -6,28 +6,37 @@ use App\Follow;
 @extends('layouts.login')
 
 @section('content')
-<div>
-<h2>Follower list</h2>
-@if($users -> isNotEmpty() )
-@foreach ($users->reverse() as $user)
-    <div>
-        <img src="{{ $user->icon }}">
+
+
+<div class="fl-container">
+    <div class=fl-text>
+        <h3>Follower list</h3>
     </div>
-@endforeach
-@endif
+
+    @if($users -> isNotEmpty() )
+        <div class="fl-icon">
+           @foreach ($users->reverse() as $user)
+              <img src="{{ $user->icon }}">
+            @endforeach
+        </div>
+    @endif
 </div>
 
 @if($posts -> isNotEmpty() )
 @foreach ($posts->reverse() as $post)
-    <div>
+    <div class="post-container">
         {!! Form::open(['url' => '/user_profile']) !!}
         {{ Form::image($post->user->icon, 'alt text') }}
-        {{ Form::hidden('user',$post->user->id) }}
+        {{ Form::hidden('user',$post->user->id ) }}
         {!! Form::close() !!}
-        <!-- 押すとユーザー情報を飛ばしプロフィールが表示されるアイコン -->
-        <h3>{{$post->user->username}}</h3>
-        <p>{{$post->post}}</p>
-        <p>{{$post->created_at}}</p>
+        <!-- 押すとプロフィールが表示されるアイコン -->
+        <div class="post-box1">
+        <p class="post-username">{{$post->user->username}}</p>
+        <p  class="post-post">{{$post->post}}</p>
+        </div>
+        <div class="post-box2">
+        <p class="post-create">{{$post->created_at}}</p>
+        </div>
     </div>
 @endforeach
 @endif

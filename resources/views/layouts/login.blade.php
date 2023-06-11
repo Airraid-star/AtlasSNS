@@ -36,43 +36,68 @@ use App\Follow;
 </head>
 <body>
     <header>
-        <div id = "head">
-            <p class="atlas"><a href="/top"><img src="images/atlas.png"></a></p>
-            <p class="header-name"><a data-toggle="collapse" href="#functionList" role="button" aria-expanded="false" aria-controls="functionList">
-                {{Auth::user()->username}}さん<img src="{{Auth::user()->icon}}">
-            </a></p>
+        <div class = "header-container">
 
-            <div class="collapse" id="functionList">
-                <div class="card">
-                    <div class="card-body">
-                         <ul>
-                             <li><a href="/top">ホーム</a></li>
-                             <li><a href="/profile">プロフィール編集</a></li>
-                             <li><a href="/logout">ログアウト</a></li>
-                         </ul>
-                    </div>
-                </div>
+            <div class="header-atlas">
+                <a href="/top"><img src="images/atlas.png"></a>
             </div>
-        </div>
 
+            <div class="header-box" >
+                <p class="header-name">{{Auth::user()->username}}　さん</p>
+
+                <div class="header-arrow">
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <img class="header-icon" src="{{Auth::user()->icon}}">
+            </div>
     </header>
+
     <div id="row">
         <div id="container">
             @yield('content')
         </div >
         <div id="side-bar">
+
+
+            <div class="accordion">
+                <div class="accordion-box">
+                    <a class="accordion-text"  href="/top">ホーム</a>
+                </div>
+                <div class="accordion-box">
+                    <a class="accordion-text" href="/profile">プロフィール編集</a>
+                </div>
+                <div class="accordion-box">
+                    <a class="accordion-text" href="/logout">ログアウト</a>
+                </div>
+           </div>
+
+
             <div id="confirm">
                 <p>{{Auth::user()->username}}さんの</p>
                 <div>
-                <p>フォロー数　{{ Follow::where('following_id', Auth::user()->id)->count() }}人</p>
+                <p>フォロー数　　{{ Follow::where('following_id', Auth::user()->id)->count() }}人</p>
                 </div>
-                <p class="btn btn-primary"><a href="/follow-list">フォローリスト</a></p>
+                <div class="confirm-btn">
+                    <a class="btn btn-primary" href="/follow-list">フォローリスト</a>
+                </div>
                 <div>
                 <p>フォロワー数　{{ Follow::where('followed_id', Auth::user()->id)->count() }}人</p>
                 </div>
-                <p class="btn btn-primary"><a href="follower-list">フォロワーリスト</a></p>
+                <div class="confirm-btn">
+                    <a class="btn btn-primary" href="follower-list">フォロワーリスト</a></p>
+                </div>
             </div>
-            <p class="btn btn-primary"><a href="/search">ユーザー検索</a></p>
+
+            <div class="search">
+                <a class="btn btn-primary" href="/search">ユーザー検索</a></p>
+
+
+
+
+
+            </div>
         </div>
     </div>
     <footer>
